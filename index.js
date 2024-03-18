@@ -23,10 +23,13 @@ const webPageWorkers = [
 
 ];
 
+const averageCost =[];
+
 let counter = 0
 let maxWorkers = workers.length;
 const workerJobs =document.querySelectorAll(`#occupation`);
 const addWorkerIntervalId = setInterval(addWorker, 500);
+const averageCostIntervalId =setInterval(averageFee,500)
 console.log( `wtf`,webPageWorkers)
 
 
@@ -35,17 +38,33 @@ render();
 function render(){
 
 
-  const workerName = document.querySelector(`#name`);
-
-  // for (let name of webPageWorkers){
-    const liName = document.createElement("li");
-    
-    //make the text content of the liName the each name of the wpw array
+  const workerName = document.querySelector(`#name`)
+  const liName = document.createElement("li");
+     //make the text content of the liName the each name of the wpw array
     let getAName = webPageWorkers[webPageWorkers.length-1];
     liName.textContent = getAName.name;
     workerName.appendChild(liName);
-    console.log (`fkn name`,liName.textConten);
-    console.log (`wps`,liName);
+
+  const workerJob = document.querySelector(`#occupation`);
+  const liJob = document.createElement(`li`);
+    let getAJob =webPageWorkers[webPageWorkers.length-1];
+    liJob.textContent= getAJob.occupation;
+    workerJob.appendChild(liJob);
+
+  const workerFee =document.querySelector(`#price`);
+  const liFee = document.createElement(`li`);
+    let getPrice=webPageWorkers[webPageWorkers.length-1];
+    liFee.textContent =getPrice.price;
+    workerFee.appendChild(liFee);
+
+
+  const avgStartingPrice =document.querySelector(`h2`);
+    const avgPrice =document.createElement (`h2`);
+    avgPrice.innerText= webPageWorkers.reduce((totalPrice, currentWorker)=>
+    totalPrice + currentWorker.price,0)/webPageWorkers.length;
+    avgStartingPrice.replaceChildren(avgPrice);
+
+
 
     
 
@@ -62,7 +81,7 @@ webPageWorkers.push(workers[counter]);
 if (webPageWorkers.length >= maxWorkers) {
   clearInterval(addWorkerIntervalId);
 };
-render();
+// render();
 counter++;
 console.log( `wl`,webPageWorkers.length)
 console.log( `wpwl`,webPageWorkers)
@@ -70,3 +89,20 @@ console.log( `wpwl`,webPageWorkers)
 }
 
 
+function averageFee (){
+  const totalFee = webPageWorkers.reduce((totalPrice, currentWorker)=>
+  totalPrice + currentWorker.price,0)
+
+  console.log(totalFee)
+  if (webPageWorkers.length >= maxWorkers) {
+    clearInterval(averageCostIntervalId);
+  };
+render();
+}
+//   const averagePrice = webPageWorkers.reuce((cost, thisThing)=>{
+//     const {price}=thisThing;
+//     return {...cost,[price]:webPageWorkers};
+    
+// });
+// console.log(averagePrice);
+// };
