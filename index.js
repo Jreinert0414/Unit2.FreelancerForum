@@ -29,8 +29,8 @@ const averageCost =[];
 let counter = 0
 let maxWorkers = workers.length+2;
 const workerJobs =document.querySelectorAll(`#occupation`);
-const addWorkerIntervalId = setInterval(addWorker, 500);
-const averageCostIntervalId =setInterval(averageFee,500)
+const addWorkerIntervalId = setInterval(addWorker, 3000);
+const averageCostIntervalId =setInterval(averageFee,3000)
 
 
 
