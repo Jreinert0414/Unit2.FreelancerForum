@@ -20,17 +20,18 @@ const workers = [
   { name: "Danny Ocean", price: 120, occupation: "Heist Planner" },
 ];
 const webPageWorkers = [
-
+{ name: "Cotton Eye Joe", price: 90, occupation: "Farmer" },
+{ name: "Ash", price: 85, occupation: "Animal Control" },
 ];
 
 const averageCost =[];
 
 let counter = 0
-let maxWorkers = workers.length;
+let maxWorkers = workers.length+2;
 const workerJobs =document.querySelectorAll(`#occupation`);
 const addWorkerIntervalId = setInterval(addWorker, 500);
 const averageCostIntervalId =setInterval(averageFee,500)
-console.log( `wtf`,webPageWorkers)
+
 
 
 render();
@@ -58,8 +59,8 @@ function render(){
     workerFee.appendChild(liFee);
 
 
-  const avgStartingPrice =document.querySelector(`h2`);
-    const avgPrice =document.createElement (`h2`);
+  const avgStartingPrice =document.querySelector(`#priceavg`);
+    const avgPrice =document.createElement (`h3`);
     avgPrice.innerText= webPageWorkers.reduce((totalPrice, currentWorker)=>
     totalPrice + currentWorker.price,0)/webPageWorkers.length;
     avgStartingPrice.replaceChildren(avgPrice);
@@ -73,19 +74,18 @@ function render(){
 
 //this function is going to add the value of the name of the webPageWorkers 
 //the function go gernerate a name to be added to the empty array
-console.log(`wpw`,webPageWorkers)
 
 function addWorker() {
-webPageWorkers.push(workers[counter]);
+webPageWorkers.push(workers[counter]); // I was ablet to use the Math.random
+                                      // to generate a random index to pull from 
+                                      //the workers array but it repeated so I
+                                      //thought it was cleaner to go down the each index
 
 if (webPageWorkers.length >= maxWorkers) {
   clearInterval(addWorkerIntervalId);
 };
 // render();
 counter++;
-console.log( `wl`,webPageWorkers.length)
-console.log( `wpwl`,webPageWorkers)
-
 }
 
 
@@ -93,7 +93,7 @@ function averageFee (){
   const totalFee = webPageWorkers.reduce((totalPrice, currentWorker)=>
   totalPrice + currentWorker.price,0)
 
-  console.log(totalFee)
+
   if (webPageWorkers.length >= maxWorkers) {
     clearInterval(averageCostIntervalId);
   };
